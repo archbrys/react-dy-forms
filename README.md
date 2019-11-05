@@ -1,6 +1,6 @@
 # react-dy-forms
 
-A simple dynamic form that you can use with [React](https://reactjs.org/)
+A simple dynamic form that you can use for [React](https://reactjs.org/)
 
 > 
 
