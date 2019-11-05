@@ -6,6 +6,7 @@ export default class App extends Component {
   render () {
     const fields = [
       {
+        name : "firstname",
         label : "First Name",
         placeholder : "",
         defaultValue : "test",
@@ -13,9 +14,10 @@ export default class App extends Component {
         isRequired: true
       },
       {
+        name : "lastname",
         label : "Last Name",
         placeholder : "lastname",
-        // defaultValue : "test",
+        defaultValue : "test",
         type: "text",
         isRequired: true
       }

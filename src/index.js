@@ -1,35 +1,100 @@
 // Imports: Dependencies
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 //Imports: Styles
 import styles from './styles.css'
 
 
-const Input = ({input}) => (
+const useForm = ({initialValue}) => {
+  const [values, handleChange] = useState(initialValue);
+
+  return [values, e => {
+    handleChange({
+      ...values,
+      [e.target.name] : e.target.value
+    })
+  },
+  v => {
+    handleChange(v)
+  }]
+}
+
+const Input = ({input, handleChange}) => (
   <div className={styles.inputGroup}>
     <label>{input.label}</label>
-    <input type={input.type} placeholder={input.placeholder} defaultValue={input.defaultValue}/>
+    <input onChange={handleChange} type={input.type} name={input.name} placeholder={input.placeholder} defaultValue={input.defaultValue}/>
   </div>
 )
 
-
-const DyForms = (props) => {
-  console.log(props.fields)
+const Form = ({fields, initialValue, submitValues} = props) => {
   // Return null if field is not an array
-  if (!Array.isArray(props.fields)) return null;
+  if (!Array.isArray(fields)) return null;
+  const [values, handleChange, setValues] = useForm(initialValue);
+  const formRef = useRef();
+
+  // Monitor initialValue change and set as initialValue
+  useEffect(() => {
+    setValues(initialValue)
+  }, [initialValue])
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitValues(values)
+  }
 
   return (
-    <form className={styles.formStyle}>
-      {props.fields.map((input, i) => {
-        return <Input key={`dy-${i}`} input={input}/>
+    <form onSubmit={handleSubmit} className={styles.formStyle} ref={formRef}>
+      {fields.map((input, i) => {
+        return <Input key={`dy-${i}`} input={input} handleChange={handleChange}/>
       })}
+      <button type="submit">Submit</button>
     </form>
   )
 }
 
+export default class DyForms extends Component {
+
+    state = {
+      initialValue : {}
+    };
+
+    componentDidMount() {
+      let initialValue = {}
+      this.props.fields.forEach(element => {
+        initialValue = {
+          ...initialValue,
+          [element.name] : element.defaultValue
+        }
+      });
+
+      this.setState({
+        initialValue : initialValue
+      })
+    };
+
+
+    submitValues = (values) => {
+      console.log(values)
+    }
+
+    render() {
+      return(
+        <Form 
+          {...this.props} 
+          initialValue={this.state.initialValue}
+          submitValues={this.submitValues}
+          />
+      )
+    }
+}
+
+
+
 DyForms.propTypes  = {
   fields : PropTypes.arrayOf(PropTypes.exact({
+    name : PropTypes.string.isRequired,
     label : PropTypes.string.isRequired,
     placeholder : PropTypes.string,
     defaultValue : PropTypes.string,
@@ -37,6 +102,3 @@ DyForms.propTypes  = {
     isRequired:  PropTypes.bool
   })).isRequired,
 }
-
-//Export 
-export default DyForms;
