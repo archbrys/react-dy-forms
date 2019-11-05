@@ -22,8 +22,27 @@ import DyForms from 'react-dy-forms'
 
 class Example extends Component {
   render () {
+    const fields = [
+      {
+        name : "firstname",
+        label : "First Name",
+        placeholder : "",
+        defaultValue : "test",
+        type: "text",
+        isRequired: true
+      },
+      {
+        name : "lastname",
+        label : "Last Name",
+        placeholder : "lastname",
+        defaultValue : "test",
+        type: "text",
+        isRequired: true
+      }
+    ]
+
     return (
-      <DyForms />
+      <DyForms fields={fields}/>
     )
   }
 }

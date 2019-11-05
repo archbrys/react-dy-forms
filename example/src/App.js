@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import ExampleComponent from 'react-dy-forms'
+import DyForms from 'react-dy-forms'
 
 export default class App extends Component {
   render () {
@@ -24,7 +24,7 @@ export default class App extends Component {
     ]
     return (
       <div>
-        <ExampleComponent fields={fields} />
+        <DyForms fields={fields} />
       </div>
     )
   }
