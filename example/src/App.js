@@ -28,6 +28,20 @@ export default class App extends Component {
         defaultValue : "",
         type: "password",
         isRequired: true
+      },
+      {
+        name : "gender",
+        label : "Gender",
+        type: "select",
+        options : [{
+          value : "male",
+          name : "Male"
+        },
+        {
+          value : "female",
+          name : "Female"
+        }
+      ]
       }
     ]
     return (

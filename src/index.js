@@ -10,6 +10,7 @@ const useForm = ({initialValue}) => {
   const [values, handleChange] = useState(initialValue);
 
   return [values, e => {
+    console.log(e.target.value)
     handleChange({
       ...values,
       [e.target.name] : e.target.value
@@ -24,6 +25,18 @@ const Input = ({input, handleChange}) => (
   <div className={styles.inputGroup}>
     <label>{input.label}</label>
     <input onChange={handleChange} type={input.type} name={input.name} placeholder={input.placeholder} defaultValue={input.defaultValue} required={input.isRequired}/>
+  </div>
+)
+
+const Select = ({input, handleChange}) => (
+  <div className={styles.inputGroup}>
+    <label>{input.label}</label>
+    <select name={input.name} onChange={handleChange}>
+      <option defaultValue>Select {input.name}</option>
+      {input.options.map((option, i) => {
+        return <option key={`option-${i}`} value={option.value}>{option.name}</option>
+      })}
+    </select>
   </div>
 )
 
@@ -47,7 +60,11 @@ const Form = ({fields, initialValue, submitValues} = props) => {
   return (
     <form onSubmit={handleSubmit} className={styles.formStyle} ref={formRef}>
       {fields.map((input, i) => {
-        return <Input key={`dy-${i}`} input={input} handleChange={handleChange}/>
+        if (input.type === "text" || input.type === "password") {
+          return <Input key={`dy-${i}`} input={input} handleChange={handleChange}/>
+        } else if (input.type === "select") {
+          return <Select key={`dy-${i}`} input={input} handleChange={handleChange} />
+        }
       })}
       <button type="submit">Submit</button>
     </form>
