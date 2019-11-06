@@ -23,7 +23,7 @@ const useForm = ({initialValue}) => {
 const Input = ({input, handleChange}) => (
   <div className={styles.inputGroup}>
     <label>{input.label}</label>
-    <input onChange={handleChange} type={input.type} name={input.name} placeholder={input.placeholder} defaultValue={input.defaultValue}/>
+    <input onChange={handleChange} type={input.type} name={input.name} placeholder={input.placeholder} defaultValue={input.defaultValue} required={input.isRequired}/>
   </div>
 )
 
