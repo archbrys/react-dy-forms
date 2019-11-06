@@ -26,18 +26,40 @@ class Example extends Component {
       {
         name : "firstname",
         label : "First Name",
-        placeholder : "",
-        defaultValue : "test",
+        placeholder : "First Name",
+        defaultValue : "",
         type: "text",
         isRequired: true
       },
       {
         name : "lastname",
         label : "Last Name",
-        placeholder : "lastname",
-        defaultValue : "test",
+        placeholder : "Last Name",
+        defaultValue : "",
         type: "text",
         isRequired: true
+      },
+      {
+        name : "password",
+        label : "Password",
+        placeholder : "",
+        defaultValue : "",
+        type: "password",
+        isRequired: true
+      },
+      {
+        name : "gender",
+        label : "Gender",
+        type: "select",
+        options : [{
+          value : "male",
+          name : "Male"
+        },
+        {
+          value : "female",
+          name : "Female"
+        }
+      ]
       }
     ]
 
