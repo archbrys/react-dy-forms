@@ -23,7 +23,7 @@ export default class App extends Component {
       }
     ]
     return (
-      <div>
+      <div style={{display: "block", margin: "0 auto", width: "40%"}}>
         <DyForms fields={fields} />
       </div>
     )
